@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
+    function loadTasks() {
+        const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[');
+        storedTasks.forEach(taskText => addTask(taskText, false));
+    }
+
     // Function to add a new task
     function addTask() {
         const taskText = taskInput.value.trim();
@@ -15,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         if (taskText !== " ") {
-                     // Create a new list item (li) element
+                 // Create a new list item (li) element
                 const taskItem = document.createElement('li');
                 taskItem.textContent = taskText;
                  // Create a remove button
@@ -29,19 +34,30 @@ document.addEventListener('DOMContentLoaded', () => {
                      // Append button to list item, then list item to task list
                 taskItem.appendChild(removeButton);
                 taskList.appendChild(taskItem);
+
+                if (save) {
+                    const storedTasks= JSON.parse(localStorage.getItem('tasks') || '[');
+                    storedTasks.push(taskText);
+                    localStorage.setItem('tasks', JSON.stringify(storedTasks));
+                }
     }
 
     // Clear input field
     taskInput.value = "";
 }
-
+        // Function to remove task from localStorage
+        function removeTaskFromStorage(taskText) {
+            let storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+            storedTasks = storedTasks.filter(task => task !== taskText);
+            localStorage.setItem('tasks', JSON.stringify(storedTasks));
     // Event listener for the Add Task button
-    addButton.addEventListener('click', addTask);
+    addButton.addEventListener('click', () => addTask(taskInput.value));
 
     // Event listener for Enter key in the input field
     taskInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
-            addTask();
+            addTask(taskInput.value);
         }
     });
 });
+loadTasks();
