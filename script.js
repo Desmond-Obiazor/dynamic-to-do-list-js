@@ -18,27 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
                      // Create a new list item (li) element
                 const taskItem = document.createElement('li');
                 taskItem.textContent = taskText;
-         
                  // Create a remove button
                 const removeButton = document.createElement('button');
                 removeButton.textContent = "Remove";
                 removeButton.classList.add('remove-btn');
-                 
                      // Add event listener to remove the task when clicked
                 removeButton.addEventListener('click', () => {
-                    taskList.removeChild(taskItem);
-                     });
-         
+                taskList.removeChild(taskItem);
+                });
                      // Append button to list item, then list item to task list
-                     taskItem.appendChild(removeButton);
-                     taskList.appendChild(taskItem);
-        }
-
-        // Clear input field
-        
-        }
-taskInput.value = "";
+                taskItem.appendChild(removeButton);
+                taskList.appendChild(taskItem);
     }
+
+    // Clear input field
+    taskInput.value = "";
+}
 
     // Event listener for the Add Task button
     addButton.addEventListener('click', addTask);
