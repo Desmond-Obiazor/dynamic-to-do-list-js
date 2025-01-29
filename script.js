@@ -13,8 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (taskText === "") {
             alert("Please enter a task.");
             return;
-        }
-
+        } else {
         // Create a new list item (li) element
         const taskItem = document.createElement('li');
         taskItem.textContent = taskText;
@@ -34,7 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
         taskList.appendChild(taskItem);
 
         // Clear input field
-        taskInput.value = "";
+        
+        }
+taskInput.value = "";
     }
 
     // Event listener for the Add Task button
