@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     // Select the necessary DOM elements
-    const addButton = document.getElementById('add-task-btn');
+    const addButton = document.getElementById('add-task');
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create a new list item (li) element
         const taskItem = document.createElement('li');
-        taskItem.textContent = taskText;
+        taskItem.appendChild(document.createTextNode(taskText));
 
         // Create a remove button
         const removeButton = document.createElement('button');
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Add event listener to remove the task when clicked
         removeButton.addEventListener('click', () => {
-            taskList.removeChild(taskItem);
+            taskItem.remove();
         });
 
         // Append button to list item, then list item to task list
